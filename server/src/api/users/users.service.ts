@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { CreateUserDto } from './dto/create.dto';
 import { GetUserDto } from './dto/get.dto';
 import { Users, UsersDocument } from './users.schema';
 import { Errors } from 'src/utils';
@@ -12,11 +11,6 @@ export class UsersService {
   constructor(
     @InjectModel(Users.name) private usersModel: Model<UsersDocument>,
   ) {}
-
-  create(createUserDto: CreateUserDto): Promise<Users> {
-    const createdUser = new this.usersModel(createUserDto);
-    return createdUser.save();
-  }
 
   async findAll(): Promise<Users[]> {
     return await this.usersModel.find().exec();

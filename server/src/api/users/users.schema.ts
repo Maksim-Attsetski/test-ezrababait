@@ -19,6 +19,9 @@ export class Users {
 
   @Prop({ type: [{ type: MSchema.Types.ObjectId, ref: 'Users' }] })
   frends: [UsersDocument];
+
+  @Prop()
+  createdAt: string;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);
