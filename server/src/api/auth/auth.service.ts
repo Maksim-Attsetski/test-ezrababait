@@ -117,4 +117,21 @@ export class AuthService {
       return null;
     }
   }
+
+  async refresh(refreshToken: string): Promise<IAuthResponse> {
+    if (!refreshToken) {
+      throw Errors.unauthorized();
+    }
+    const tokenIsValid = await this.validateToken(refreshToken, true);
+    const tokenData = await this.getToken(refreshToken);
+
+    if (!tokenData || !tokenIsValid) {
+      throw Errors.unauthorized();
+    }
+
+    const user = await this.usersModel.findById(tokenData.userID);
+    const tokens = await this.generateAndSaveTokens(user);
+
+    return { tokens, user };
+  }
 }

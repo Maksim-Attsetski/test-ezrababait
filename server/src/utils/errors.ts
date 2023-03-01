@@ -8,7 +8,9 @@ class Errors {
   badRequest(message: string) {
     return new HttpException(message, HttpStatus.BAD_REQUEST);
   }
-
+  unauthorized() {
+    return new HttpException('You are not authorized', HttpStatus.UNAUTHORIZED);
+  }
   undefinedError(cause?: Error) {
     return new HttpException(
       'Unknown error',
