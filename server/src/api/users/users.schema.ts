@@ -18,7 +18,13 @@ export class Users {
   tag: string;
 
   @Prop({ type: [{ type: MSchema.Types.ObjectId, ref: 'Users' }] })
-  frends: [UsersDocument];
+  friends: [UsersDocument];
+
+  @Prop({ type: [{ type: MSchema.Types.ObjectId, ref: 'Users' }] })
+  followers: [UsersDocument];
+
+  @Prop({ type: [{ type: MSchema.Types.ObjectId, ref: 'Users' }] })
+  friendRequests: [UsersDocument];
 
   @Prop()
   createdAt: string;

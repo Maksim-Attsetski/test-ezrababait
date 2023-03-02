@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { GetUserDto } from './dto/get.dto';
 import { Users, UsersDocument } from './users.schema';
-import { Errors } from 'src/utils';
+import { Errors, changeArray, IListForChange } from 'src/utils';
 
 @Injectable()
 export class UsersService {
@@ -31,6 +31,14 @@ export class UsersService {
 
     if (!updatedUser) throw Errors.notFound('User');
     return updatedUser;
+  }
+
+  async updateList(id: string, list: IListForChange[]) {
+    const user = await this.usersModel.findById(id);
+
+    if (!user) throw Errors.notFound('User');
+    await changeArray<Users>(list, GetUserDto, user);
+    return user;
   }
 
   async remove(id: string) {

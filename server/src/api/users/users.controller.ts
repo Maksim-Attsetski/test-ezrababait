@@ -1,6 +1,7 @@
 import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GetUserDto } from './dto/get.dto';
+import { IListForChange } from 'src/utils';
 
 @Controller('api/users')
 export class UsersController {
@@ -13,6 +14,11 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
+  }
+
+  @Patch('list/:id')
+  updateList(@Param('id') id: string, @Body() list: IListForChange[]) {
+    return this.usersService.updateList(id, list);
   }
 
   @Patch(':id')
