@@ -1,0 +1,11 @@
+.empty {
+  @apply bg-white py-4 px-6 rounded-xl flex flex-col items-center justify-center gap-5;
+
+  &Img {
+    @apply w-56;
+  }
+
+  &Text {
+    @apply text-center text-lg;
+  }
+}

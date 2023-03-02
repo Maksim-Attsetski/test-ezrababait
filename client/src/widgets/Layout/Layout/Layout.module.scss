@@ -1,0 +1,44 @@
+@import 'shared/helpers/constants.scss';
+@import 'shared/helpers/media.scss';
+
+@mixin minAll {
+  @include for-tablet {
+    left: 0;
+    max-width: 100%;
+  }
+}
+
+.rootLayout {
+  @apply relative overflow-hidden;
+  max-width: 100vw;
+  margin-top: $headerHeight;
+}
+
+.content {
+  @apply relative w-full flex transition-all;
+  min-height: $contentHeight !important;
+  max-width: $contentMinWidth;
+  left: $siderMinWidth / 2;
+  @include minAll;
+
+  &.auth {
+    left: $siderMinWidth;
+    @include minAll;
+  }
+
+  &.active {
+    @apply max-w-[100vw] left-0;
+    @include minAll;
+
+    &.auth {
+      max-width: $contentMaxWidth;
+      left: $siderMaxWidth;
+      @include minAll;
+    }
+  }
+}
+
+.footer {
+  @apply text-center p-0 flex items-center justify-center;
+  min-height: $footerHeight;
+}

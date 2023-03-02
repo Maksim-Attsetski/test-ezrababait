@@ -1,0 +1,7 @@
+.page {
+  @apply absolute top-1/2 left-1/2 w-full flex flex-col items-center;
+  transform: translate(-50%, -50%);
+  .text {
+    font-size: calc(4vmin + 11px);
+  }
+}
