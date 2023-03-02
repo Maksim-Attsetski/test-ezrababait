@@ -1,7 +1,13 @@
-import React, { FC } from 'react';
+import { useAnimationText } from 'hooks';
+import React, { FC, memo } from 'react';
+import { AnimateTitle } from 'widgets/Home';
 
 const HomePage: FC = () => {
-  return <div>home</div>;
+  return (
+    <div className='container'>
+      <AnimateTitle />
+    </div>
+  );
 };
 
-export default HomePage;
+export default memo(HomePage);

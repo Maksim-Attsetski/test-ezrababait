@@ -1,0 +1,21 @@
+@import 'shared/all.scss';
+
+$fontSize: calc(3vmin + 10px);
+
+.title {
+  font-size: $fontSize;
+  &.main {
+    color: $main;
+  }
+}
+
+.titleContainer {
+  display: flex;
+  align-items: flex-end;
+}
+
+.line {
+  width: 2px;
+  height: $fontSize !important;
+  margin-left: 5px;
+}

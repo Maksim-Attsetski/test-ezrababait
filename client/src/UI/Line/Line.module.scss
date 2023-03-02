@@ -1,0 +1,26 @@
+@import 'shared/all.scss';
+
+.line {
+  background: $dark;
+  display: inline-block;
+  &.horizontal {}
+  &.vertical {
+    animation: disappear 0.7s linear 0s infinite;
+    width: 1px;
+    height: 15px;
+  }
+
+}
+
+
+body.dark {
+  .line {
+    background: $white;
+  }
+}
+
+
+@keyframes disappear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
