@@ -14,7 +14,6 @@ import { UsersModule } from './../users/users.module';
     }),
     MongooseModule.forRoot(process.env.DB_URL),
     UsersModule,
-    AuthModule,
   ],
   controllers: [],
   providers: [],
