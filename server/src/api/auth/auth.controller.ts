@@ -5,7 +5,7 @@ import { AuthService, IAuthResponse } from './auth.service';
 import { SignupDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 
-@Controller('api/auth')
+@Controller('auth')
 export class AuthController {
   cookieOptions: any;
   constructor(private readonly authService: AuthService) {

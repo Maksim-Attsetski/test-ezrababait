@@ -13,7 +13,7 @@ import { GetUserDto } from './dto/get.dto';
 import { IListForChange, IQuery } from 'src/utils';
 import { AuthGuard } from 'src/guards/authGuard';
 
-@Controller('api/users')
+@Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
