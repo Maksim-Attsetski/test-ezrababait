@@ -1,0 +1,6 @@
+$error: #e22424;
+
+// height
+$headerHeight: 80px;
+$footerHeight: 60px;
+$contentHeight: calc(100vh - $headerHeight - $footerHeight);

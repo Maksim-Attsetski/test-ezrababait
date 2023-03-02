@@ -1,27 +1,22 @@
-@import "shared/helpers/media.scss";
-@import "shared/helpers/constants.scss";
+@import "shared/all.scss";
 
 .header {
-  @apply fixed top-0 left-0 w-full z-50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
   height: $headerHeight;
+  background: #b05959;
   &Body {
-    @apply h-full flex justify-between items-start;
+    height: 100%;
+    display: flex;
+    justify-content: space-between
   }
 }
 
 .buttonsContainer {
-  @apply flex my-auto gap-2;
-}
-
-.drawerButton {
-  @apply hidden;
-  @include for-tablet {
-    @apply block;
-  }
-}
-.sider {
-  @apply block;
-  @include for-tablet {
-    @apply hidden;
-  }
+  display: flex;
+  gap: 2rem;
+  margin: auto 0;
 }
