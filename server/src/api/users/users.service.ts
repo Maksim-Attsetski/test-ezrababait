@@ -4,7 +4,13 @@ import { Model } from 'mongoose';
 
 import { GetUserDto } from './dto/get.dto';
 import { Users, UsersDocument } from './users.schema';
-import { Errors, changeArray, IListForChange } from 'src/utils';
+import {
+  Errors,
+  changeArray,
+  IListForChange,
+  FindUtils,
+  IQuery,
+} from 'src/utils';
 
 @Injectable()
 export class UsersService {
@@ -12,8 +18,8 @@ export class UsersService {
     @InjectModel(Users.name) private usersModel: Model<UsersDocument>,
   ) {}
 
-  async findAll(): Promise<Users[]> {
-    return await this.usersModel.find().exec();
+  async findAll(query: IQuery): Promise<Users[]> {
+    return await FindUtils.getAllWithQuery(this.usersModel, query, GetUserDto);
   }
 
   async findOne(id: string): Promise<Users> {
