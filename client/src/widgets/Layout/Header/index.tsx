@@ -30,7 +30,10 @@ const _Header: FC<IProps> = ({ setIsOpen, isOpen }) => {
             onClick={() => setIsOpen(!isOpen)}
             text={isOpen ? 'close' : 'open'}
           />
-          <Button onClick={onBurgerClick} text={isAuth ? 'Выйти' : 'Войти'} />
+          <Button
+            onClick={onBurgerClick}
+            text={isAuth ? 'Logout' : 'Sign in'}
+          />
         </div>
       </div>
     </div>

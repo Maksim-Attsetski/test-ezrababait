@@ -1,9 +1,10 @@
 @import 'shared/all.scss';
 
-$fontSize: calc(3vmin + 10px);
+$fontSize: calc(7vmin + 20px);
 
 .title {
   font-size: $fontSize;
+  line-height: 1.2;
   &.main {
     color: $main;
   }
