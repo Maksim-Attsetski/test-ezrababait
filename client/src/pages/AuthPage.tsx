@@ -1,9 +1,10 @@
 import React, { FC, memo } from 'react';
+import { AuthForm } from 'widgets/Authorization';
 
 const AuthPage: FC = () => {
   return (
     <>
-    <div>auth</div>
+      <AuthForm />
     </>
   );
 };

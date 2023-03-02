@@ -4,7 +4,7 @@ import { useTypedSelector, useActions } from 'hooks';
 import { routeNames } from 'navigation/types';
 import { tokenName, getApiError } from 'shared';
 import { authService, IAuthUserReponse } from 'widgets/Authorization';
-import { ICreateUser } from 'widgets/User';
+import { ICreateUser, ILoginInfo } from 'widgets/User';
 
 const useAuth = () => {
   const navigation = useNavigate();
@@ -13,13 +13,12 @@ const useAuth = () => {
 
   const dispatchAuth = (newUser: IAuthUserReponse) => {
     action.setIsAuthAC(newUser.user);
-    newUser?.user?._id &&
-      navigation(routeNames[!!newUser ? 'Home' : 'Auth']);
+    newUser?.user?._id && navigation(routeNames[!!newUser ? 'Home' : 'Auth']);
   };
 
-  const onLogin = async (email: string, pass: string): Promise<boolean> => {
+  const onLogin = async (userInfo: ILoginInfo): Promise<boolean> => {
     try {
-      const newUser = await authService.login(email, pass);
+      const newUser = await authService.login(userInfo);
       dispatchAuth(newUser);
       return !!newUser?.user?._id;
     } catch (error) {

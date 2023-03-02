@@ -1,9 +1,12 @@
 
-export interface ICreateUser {
-  email: string;
+export interface ILoginInfo {
   tag: string;
-  name: string;
   password: string;
+}
+
+export interface ICreateUser extends ILoginInfo {
+  email: string;
+  name: string;
 }
 
 export interface IUser extends ICreateUser {

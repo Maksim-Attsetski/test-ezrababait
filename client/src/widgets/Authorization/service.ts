@@ -1,11 +1,7 @@
 import axios from 'axios';
-import { ICreateUser, IUser } from 'widgets/User';
+import { ICreateUser, ILoginInfo, IUser } from 'widgets/User';
 import { $api, tokenName, TResponse, baseURL } from 'shared';
 import { IAuthUserReponse } from './types';
-
-interface ILogin {
-  (email: string, password: string): Promise<IAuthUserReponse>;
-}
 
 class AuthService {
   routes = {
@@ -15,11 +11,11 @@ class AuthService {
     logout: 'auth/logout',
   }
 
-  login: ILogin = async (email, password) => {
+  login = async (userInfo: ILoginInfo): Promise<IAuthUserReponse> => {
     try {
       const data = await $api.post<IAuthUserReponse>(this.routes.login, {
-        email,
-        password,
+        tag: userInfo.tag,
+        password: userInfo.tag,
       });
 
       console.log('login', data);
