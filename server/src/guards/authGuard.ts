@@ -1,5 +1,4 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/api/auth/auth.service';
 import { Errors } from 'src/utils';
 
@@ -7,9 +6,7 @@ import { Errors } from 'src/utils';
 export class AuthGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest();
 
     try {
@@ -20,8 +17,7 @@ export class AuthGuard implements CanActivate {
       if (bearer !== 'Bearer' || !token) {
         throw Errors.unauthorized();
       }
-      const user = this.authService.validateToken(token, true);
-      console.log(user);
+      const user = await this.authService.validateToken(token, true);
 
       req.user = user;
       return true;

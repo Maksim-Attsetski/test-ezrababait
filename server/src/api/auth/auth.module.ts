@@ -18,6 +18,6 @@ import { Token, TokenSchema } from './token.schema';
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  exports: [AuthService, JwtModule],
+  exports: [AuthService],
 })
 export class AuthModule {}
