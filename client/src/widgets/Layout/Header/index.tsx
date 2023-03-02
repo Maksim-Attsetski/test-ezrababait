@@ -5,6 +5,7 @@ import { useAuth } from 'hooks';
 import { routeNames } from 'navigation/types';
 
 import s from './style.module.scss';
+import { Button } from 'UI';
 
 interface IProps {
   setIsOpen: (val: boolean) => void;
@@ -24,10 +25,12 @@ const _Header: FC<IProps> = ({ setIsOpen, isOpen }) => {
       <div className={'container ' + s.headerBody}>
         <div className={s.sider}></div>
         <div className={s.buttonsContainer}>
-          <button className={s.drawerButton} onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? 'close' :'open'}
-          </button>
-          <button onClick={onBurgerClick}>{isAuth ? 'Выйти' : 'Войти'}</button>
+          <Button
+            className={s.drawerButton}
+            onClick={() => setIsOpen(!isOpen)}
+            text={isOpen ? 'close' : 'open'}
+          />
+          <Button onClick={onBurgerClick} text={isAuth ? 'Выйти' : 'Войти'} />
         </div>
       </div>
     </div>
