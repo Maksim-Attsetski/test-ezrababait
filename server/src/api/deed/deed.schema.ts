@@ -9,7 +9,7 @@ export class Deed {
   @Prop({ required: true })
   title: string;
 
-  @Prop()
+  @Prop({ default: '' })
   description: string;
 
   @Prop({ required: true })

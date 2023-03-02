@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { IQuery } from 'src/utils';
 import { DeedService } from './deed.service';
-import { CreateDeedDto } from './dto/create-deed.dto';
 import { GetDeedDto } from './dto/get-deed.dto';
 
 @Controller('deed')
@@ -18,7 +17,7 @@ export class DeedController {
   constructor(private readonly deedService: DeedService) {}
 
   @Post()
-  create(@Body() createDeedDto: CreateDeedDto) {
+  create(@Body() createDeedDto: GetDeedDto) {
     return this.deedService.create(createDeedDto);
   }
 

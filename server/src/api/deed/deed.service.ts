@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Errors, FindUtils, IQuery } from 'src/utils';
 import { Deed } from './deed.schema';
-import { CreateDeedDto } from './dto/create-deed.dto';
 import { GetDeedDto } from './dto/get-deed.dto';
 
 @Injectable()
@@ -16,8 +15,11 @@ export class DeedService {
     return await FindUtils.getAllWithQuery(this.deedModel, query, GetDeedDto);
   }
 
-  async create(createDeedDto: CreateDeedDto) {
-    return await this.deedModel.create(createDeedDto);
+  async create(createDeedDto: GetDeedDto) {
+    return await this.deedModel.create({
+      ...createDeedDto,
+      createdAt: Date.now(),
+    });
   }
 
   async findOne(id: string) {
