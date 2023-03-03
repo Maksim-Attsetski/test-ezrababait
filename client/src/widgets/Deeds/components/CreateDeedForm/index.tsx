@@ -17,10 +17,10 @@ const CreateDeedForm: FC = () => {
   const description = useInput('', 'Deed Description (optional)');
   const goal = useInput('', 'What is your goal?');
 
-  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (user?._id) {
-      onAddDeed({
+      await onAddDeed({
         authorID: user._id,
         description: description.value,
         goal: goal.value,

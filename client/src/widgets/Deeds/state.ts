@@ -3,10 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IState {
   deeds: IDeed[];
+  selectedDeed: IDeed | null;
 }
 
 const initialState: IState = {
-  deeds: []
+  deeds: [],
+  selectedDeed: null
 }
 
 const deedSlice = createSlice({
@@ -15,6 +17,9 @@ const deedSlice = createSlice({
   reducers: {
     setDeedsAC: (state: IState, action: PayloadAction<IDeed[]>) => {
       state.deeds = action.payload
+    },
+    setSelectedDeedAC: (state: IState, action: PayloadAction<IDeed | null>) => {
+      state.selectedDeed = action.payload;
     },
     addDeedAC: (state: IState, action: PayloadAction<IDeed>) => {
       state.deeds = [...state.deeds, action.payload]

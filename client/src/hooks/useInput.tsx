@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 type TEvent = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 interface IUserInput {
@@ -37,6 +37,10 @@ const useInput: IUserInput = (
   const onClear = () => {
     setValue('');
   };
+
+  useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
 
   return {
     props: {

@@ -1,0 +1,43 @@
+@import 'shared/all.scss';
+
+.deedList {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.deedContainer {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.3rem;
+  border-radius: 1rem;
+  background: white;
+  transition: all linear 0.2s;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+.btnContainer {
+  @include flexCol(0.5rem);
+  .deleteBtn {
+    padding: 0.4rem 0.5rem 0.3rem 0.5rem;
+  }
+}
+
+.deed {
+  @include flexCol(0.5rem);
+  align-items: flex-start;
+
+  &Time {
+    color: grey;
+    font-size: calc(1vmin + 9px);
+    align-self: flex-end;
+  }
+
+  &Title {
+    align-self: center;
+    font-weight: bold;
+  }
+}

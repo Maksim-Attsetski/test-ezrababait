@@ -5,8 +5,7 @@ import { useTypedSelector } from './redux';
 import useActions from './useActions';
 
 const useDeeds = () => {
-  const { deeds } = useTypedSelector((state) => state.deeds);
-  const [deed, setDeed] = useState<null | IDeed>(null);
+  const { deeds, selectedDeed } = useTypedSelector((state) => state.deeds);
   const { action } = useActions();
 
   const onGetAllDeeds = async (query?: IQuery) => {
@@ -20,7 +19,7 @@ const useDeeds = () => {
   const onGetOneDeed = async (_id: string) => {
     try {
       const deed = await DeedService.get(_id);
-      setDeed(deed);
+      action.setSelectedDeedAC(deed);
     } catch (error) {
       throw getApiError(error);
     }
@@ -52,7 +51,8 @@ const useDeeds = () => {
 
   return {
     deeds,
-    deed,
+    selectedDeed,
+    setSelectedDeed: action.setSelectedDeedAC,
     onAddDeed,
     onDeleteDeed,
     onEditDeed,
