@@ -3,9 +3,9 @@ import React, { FC, memo, useEffect } from 'react';
 import { useDeeds } from 'hooks';
 import { List, Title } from 'UI';
 import { IDeed } from 'widgets/Deeds';
+import { dateHelper } from 'shared';
 
 import s from './DeedList.module.scss';
-import { dateHelper } from 'shared';
 interface IProps {}
 
 const DeedList: FC<IProps> = () => {

@@ -1,0 +1,14 @@
+@import 'shared/all.scss';
+
+.formWrapper {
+  @include flexCol();
+  .form {
+    @include flexCol();
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0 0.5rem;
+    &Btn {
+      align-self: flex-end;
+    }
+  }
+}

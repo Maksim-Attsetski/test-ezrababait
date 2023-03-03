@@ -12,7 +12,7 @@ import { IQuery } from 'src/utils';
 import { DeedService } from './deed.service';
 import { GetDeedDto } from './dto/get-deed.dto';
 
-@Controller('deed')
+@Controller('deeds')
 export class DeedController {
   constructor(private readonly deedService: DeedService) {}
 

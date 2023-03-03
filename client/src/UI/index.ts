@@ -6,6 +6,7 @@ import Button from './Button';
 import Line from './Line';
 import Input from './Input';
 import Title from './Title';
+import Modal from './Modal';
 
 export { 
   Button,
@@ -15,5 +16,6 @@ export {
   List,
   Line,
   Input,
-  Title
+  Title,
+  Modal
 }

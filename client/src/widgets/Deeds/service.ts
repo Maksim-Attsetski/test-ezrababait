@@ -2,11 +2,12 @@ import { $api, IQuery } from 'shared';
 import { ICreateDeed, IDeed } from './types';
 
 class DeedsService {
+  deed = 'deeds';
   deeds = 'deeds/';
   deedList = 'deeds/list';
 
   async getAll(params?: IQuery): Promise<IDeed[]> {
-    const deeds = await $api.get(this.deeds, { params });
+    const deeds = await $api.get(this.deed, { params });
     return deeds.data;
   }
   async get(_id: string): Promise<IDeed> {

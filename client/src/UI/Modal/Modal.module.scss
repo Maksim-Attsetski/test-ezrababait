@@ -1,0 +1,33 @@
+
+
+.wrapper {
+  position: fixed;;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #0000008d;
+  opacity: 0;
+  pointer-events: none;
+  transition: all linear 0.3s;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+
+    .modal {
+      transform: scale(1);
+    }
+  }
+  .modal {
+    width: clamp(300px, 90vw, 450px);;
+    padding: 1rem;
+    background: white;
+    border-radius: 1rem;
+    transform: scale(0);
+    transition: all linear 0.35s;
+  }
+}
