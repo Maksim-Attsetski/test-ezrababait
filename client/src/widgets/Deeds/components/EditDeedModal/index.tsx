@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 
 import { useDeeds, useInput, useUsers } from 'hooks';
-import { Button, Gap, Input, Modal, Title } from 'UI';
+import { Button, Gap, Input, Modal, TextArea, Title } from 'UI';
 import { IDeed } from 'widgets/Deeds';
 
 import s from './EditDeedModal.module.scss';
@@ -75,9 +75,9 @@ const EditDeedModal: FC<IProps> = ({ isVisible, setIsVisible }) => {
       <div className={s.formWrapper}>
         <Title text='Deed edition' />
         <form onSubmit={onFormSubmit} className={s.form}>
-          <Input {...title.props} />
-          <Input {...description.props} />
-          <Input {...goal.props} />
+          <Input {...title.props} maxLength={40} />
+          <TextArea {...description.props} maxLength={200} />
+          <TextArea {...goal.props} maxLength={100} />
           <Gap y={2} />
           <Button text='Confirm' disabled={isDisabled} className={s.formBtn} />
         </form>

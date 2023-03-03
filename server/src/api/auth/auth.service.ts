@@ -30,13 +30,16 @@ export class AuthService {
   ) {}
 
   async signup(signupDto: SignupDto): Promise<IAuthResponse> {
-    const userIsExist = await this.usersModel.findOne({
-      tag: signupDto.tag,
+    const emailIsExist = await this.usersModel.findOne({
       email: signupDto.email,
     });
+    const tagIsExist = await this.usersModel.findOne({ tag: signupDto.tag });
 
-    if (userIsExist)
-      throw Errors.badRequest('User with these email or tag already exist');
+    if (emailIsExist)
+      throw Errors.badRequest('User with this email already exists');
+
+    if (tagIsExist)
+      throw Errors.badRequest('User with this tag already exists');
 
     const hashPassword = await hash(signupDto.password, 7);
     const createdUser = await this.usersModel.create({

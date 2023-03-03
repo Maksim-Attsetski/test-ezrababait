@@ -95,19 +95,20 @@ const AuthForm: FC = () => {
 
   useEffect(() => {
     setErrorText('');
-  }, [password.value, confirmPassword.value, isLogin]);
+  }, [password.value, confirmPassword.value, isLogin, tag]);
 
   useEffect(() => {
-    const isPassAndTagInValid = password.value.length === 0 || !isTagValid;
+    const isPassInValid = password.value.length === 0;
     const errorOrLoading = usersIsLoading || errorText.length > 0;
 
     if (isLogin) {
-      setIsDisabled(isPassAndTagInValid || errorOrLoading);
+      setIsDisabled(isPassInValid || errorOrLoading);
     } else {
       const passwordsIsEqual = password.value !== confirmPassword.value;
 
       setIsDisabled(
-        isPassAndTagInValid ||
+        isPassInValid ||
+          !isTagValid ||
           email.value.length === 0 ||
           passwordsIsEqual ||
           errorOrLoading

@@ -19,7 +19,7 @@ class DeedsService {
     return newDeed.data;
   }
   async edit(_id: string, deed: IDeed): Promise<IDeed> {
-    const updatedDeed = await $api.post(this.deeds + _id, deed);
+    const updatedDeed = await $api.patch(this.deeds + _id, deed);
     return updatedDeed.data;
   }
   async delete(_id: string): Promise<string> {

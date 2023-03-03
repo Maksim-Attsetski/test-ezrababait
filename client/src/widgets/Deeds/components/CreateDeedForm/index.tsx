@@ -1,7 +1,7 @@
 import { useDeeds, useInput, useUsers } from 'hooks';
 import React, { FC, FormEvent, memo, useEffect, useState } from 'react';
 
-import { Button, Gap, Input, Modal, Title } from 'UI';
+import { Button, Gap, Input, Modal, TextArea, Title } from 'UI';
 import { IDeed } from 'widgets/Deeds/types';
 
 import s from './CreateDeedForm.module.scss';
@@ -51,9 +51,9 @@ const CreateDeedForm: FC = () => {
         <div className={s.formWrapper}>
           <Title text='Create you Good deed' />
           <form onSubmit={onFormSubmit} className={s.form}>
-            <Input {...title.props} />
-            <Input {...description.props} />
-            <Input {...goal.props} />
+            <Input {...title.props} maxLength={40} />
+            <TextArea {...description.props} maxLength={200} />
+            <TextArea {...goal.props} maxLength={50} />
             <Gap y={2} />
             <Button
               text='Confirm'

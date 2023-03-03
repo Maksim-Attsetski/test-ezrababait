@@ -3,9 +3,9 @@
 .wrapper {
   position: fixed;;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
+  width: 100vw;
+  min-height: 100vh;
   background: #0000008d;
   opacity: 0;
   pointer-events: none;
@@ -23,7 +23,7 @@
     }
   }
   .modal {
-    width: clamp(300px, 90vw, 450px);;
+    width: clamp(300px, 90vw, 450px);
     padding: 1rem;
     background: white;
     border-radius: 1rem;

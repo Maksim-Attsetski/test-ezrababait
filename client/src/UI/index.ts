@@ -8,6 +8,7 @@ import Input from './Input';
 import Title from './Title';
 import Modal from './Modal';
 import Sider, {IMenuLink} from './Sider';
+import TextArea from './TextArea';
 
 export type { IMenuLink }
 export { 
@@ -20,5 +21,6 @@ export {
   Line,
   Input,
   Title,
-  Modal
+  Modal,
+  TextArea,
 }
