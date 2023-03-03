@@ -1,7 +1,7 @@
 import { useAuth, useDebounce, useInput, useUsers } from 'hooks';
 import React, { FC, FormEvent, memo, useEffect, useState } from 'react';
 import { getApiError } from 'shared';
-import { Button } from 'UI';
+import { Button, Input } from 'UI';
 import { ICreateUser, ILoginInfo } from 'widgets/User';
 import s from './AuthForm.module.scss';
 
@@ -72,14 +72,14 @@ const AuthForm: FC = (props) => {
       <div className={'container ' + s.formContainer}>
         <h3>Sign {isLogin ? 'in' : 'up'}</h3>
         <form className={s.form} onSubmit={onFormSubmit}>
-          <input
+          <Input
             value={tag}
             onChange={(e) => setTag(e.target.value)}
             placeholder='Unique name'
           />
-          {!isLogin && <input type='email' {...email.props} />}
-          <input type='password' {...password.props} />
-          {!isLogin && <input type='password' {...confirmPassword.props} />}
+          {!isLogin && <Input type='email' {...email.props} />}
+          <Input type='password' {...password.props} />
+          {!isLogin && <Input type='password' {...confirmPassword.props} />}
           <div>{errorText}</div>
           <Button text='Continue' type='submit' />
         </form>
