@@ -15,7 +15,7 @@ const OpenDeeds: FC<IProps> = () => {
     <div>
       {isAuth && (
         <Button
-          onClick={() => navigate(routeNames.Auth)}
+          onClick={() => navigate(routeNames.Deeds)}
           text={'Open Good deeds'}
         />
       )}

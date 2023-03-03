@@ -4,11 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { screens } from 'pages';
 import { routeNames } from './types';
 import { Layout } from 'widgets/Layout';
-import {
-  useAuth,
-  useActions,
-  useTypedSelector,
-} from 'hooks';
+import { useAuth, useActions, useTypedSelector } from 'hooks';
 import { Loader } from 'UI';
 
 const Navigation: FC = () => {
@@ -41,7 +37,9 @@ const Navigation: FC = () => {
           <Route element={<screens.Notfound />} path={routeNames.Notfound} />
         </Route>
         {isAuth ? (
-          <Route path='/' element={<Layout />}></Route>
+          <Route path='/' element={<Layout />}>
+            <Route element={<screens.Deeds />} path={routeNames.Deeds} />
+          </Route>
         ) : (
           <Route element={<screens.Auth />} path={routeNames.Auth} />
         )}

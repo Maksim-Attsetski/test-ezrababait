@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { appReducer } from 'widgets/App';
 import { userReducer } from 'widgets/User';
+import { deedReducer } from 'widgets/Deeds';
 
 const rootReducer = combineReducers({
   user: userReducer,
   app: appReducer,
+  deeds: deedReducer,
 });
 
 export const store = configureStore({
