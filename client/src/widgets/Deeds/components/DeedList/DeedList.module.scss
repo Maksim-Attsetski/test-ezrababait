@@ -29,11 +29,16 @@
 .deed {
   @include flexCol(0.5rem);
   align-items: flex-start;
+  min-width: 250px;
 
   &Time {
     color: grey;
     font-size: calc(1vmin + 9px);
     align-self: flex-end;
+  }
+
+  &Description {
+    margin: 5px 0 5px 5px;
   }
 
   &Title {

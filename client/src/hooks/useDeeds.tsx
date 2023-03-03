@@ -7,21 +7,30 @@ import useActions from './useActions';
 const useDeeds = () => {
   const { deeds, selectedDeed } = useTypedSelector((state) => state.deeds);
   const { action } = useActions();
+  const [deedLoading, setDeedLoading] = useState<boolean>(false);
 
   const onGetAllDeeds = async (query?: IQuery) => {
     try {
+      setDeedLoading(true);
+
       const deeds = await DeedService.getAll(query);
       action.setDeedsAC(deeds);
     } catch (error) {
       throw getApiError(error);
+    } finally {
+      setDeedLoading(false);
     }
   };
   const onGetOneDeed = async (_id: string) => {
     try {
+      setDeedLoading(true);
+
       const deed = await DeedService.get(_id);
       action.setSelectedDeedAC(deed);
     } catch (error) {
       throw getApiError(error);
+    } finally {
+      setDeedLoading(false);
     }
   };
   const onAddDeed = async (deed: ICreateDeed) => {
@@ -51,6 +60,7 @@ const useDeeds = () => {
 
   return {
     deeds,
+    deedLoading,
     selectedDeed,
     setSelectedDeed: action.setSelectedDeedAC,
     onAddDeed,

@@ -1,7 +1,7 @@
 import React, { FC, memo, useEffect, useState } from 'react';
 
 import { useDeeds, useUsers } from 'hooks';
-import { Button, Gap, List, Title } from 'UI';
+import { Button, Gap, List, Loader, Title } from 'UI';
 import { IDeed } from 'widgets/Deeds';
 import { dateHelper } from 'shared';
 import { assets } from 'assets';
@@ -11,7 +11,8 @@ import EditDeedModal from '../EditDeedModal';
 interface IProps {}
 
 const DeedList: FC<IProps> = () => {
-  const { deeds, setSelectedDeed, onGetAllDeeds, onDeleteDeed } = useDeeds();
+  const { deeds, setSelectedDeed, onGetAllDeeds, onDeleteDeed, deedLoading } =
+    useDeeds();
   const { user } = useUsers();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -22,6 +23,7 @@ const DeedList: FC<IProps> = () => {
   return (
     <div>
       <EditDeedModal isVisible={isEdit} setIsVisible={setIsEdit} />
+      {deedLoading && <Loader />}
       <List
         data={deeds}
         containerClassname={s.deedList}
@@ -34,11 +36,14 @@ const DeedList: FC<IProps> = () => {
               <Title className={s.deedTitle} isSubTitle text={deed.title} />
               {deed?.description && deed?.description.length > 0 && (
                 <div>
-                  <div>Description</div>
-                  <div>{deed?.description}</div>
+                  <div>Description:</div>
+                  <div className={s.deedDescription}>{deed?.description}</div>
                 </div>
               )}
-              <div>Goal — {deed.goal}</div>
+              <div>
+                <div>Goal:</div>
+                <div className={s.deedDescription}>{deed.goal}</div>
+              </div>
               <Gap y={5} />
               {typeof deed.authorID !== 'string' && (
                 <div>by: {deed.authorID.name}</div>
