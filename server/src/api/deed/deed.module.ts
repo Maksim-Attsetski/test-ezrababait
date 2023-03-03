@@ -4,12 +4,14 @@ import { DeedController } from './deed.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Deed, DeedSchema } from './deed.schema';
 
+const deedsModel = MongooseModule.forFeature([
+  { name: Deed.name, schema: DeedSchema },
+]);
+
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: Deed.name, schema: DeedSchema }]),
-  ],
+  imports: [deedsModel],
   controllers: [DeedController],
   providers: [DeedService],
-  exports: [DeedService],
+  exports: [DeedService, deedsModel],
 })
 export class DeedModule {}

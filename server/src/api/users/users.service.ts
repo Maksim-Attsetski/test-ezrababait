@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { GetUserDto } from './dto/get.dto';
 import { Users, UsersDocument } from './users.schema';
+import { Deed, DeedDocument } from '../deed/deed.schema';
 import {
   Errors,
   changeArray,
@@ -16,6 +17,7 @@ import {
 export class UsersService {
   constructor(
     @InjectModel(Users.name) private usersModel: Model<UsersDocument>,
+    @InjectModel(Deed.name) private deedsModel: Model<DeedDocument>,
   ) {}
 
   async findAll(query: IQuery): Promise<Users[]> {
@@ -52,6 +54,7 @@ export class UsersService {
       const deletedUser = await this.usersModel.findByIdAndDelete(id);
 
       if (!deletedUser) throw Errors.notFound('User');
+      await this.deedsModel.deleteMany({ authorID: id });
       return deletedUser;
     } catch (error) {
       throw error;
