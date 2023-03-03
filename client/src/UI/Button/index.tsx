@@ -1,16 +1,23 @@
-import React, { FC, memo, MouseEventHandler } from 'react';
+import React, {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  FC,
+  memo,
+  MouseEventHandler,
+} from 'react';
 import s from './Button.module.scss';
 
-interface IProps {
-  className?: string;
+interface IProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   text: string;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  type?: 'button' | 'submit' | 'reset' | undefined;
 }
 
-const Button: FC<IProps> = ({ onClick, text, className = '', type }) => {
+const Button: FC<IProps> = ({ text, className = '', ...props }) => {
   return (
-    <button onClick={onClick} className={`${s.btn} ${className}`} type={type}>
+    <button {...props} className={`${s.btn} ${className}`}>
       {text}
     </button>
   );

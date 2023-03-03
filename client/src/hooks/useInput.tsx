@@ -13,6 +13,7 @@ interface IUserInput {
       onChange: (event: TEvent) => void;
     };
     onClear: () => void;
+    value: string;
   };
 }
 
@@ -44,6 +45,7 @@ const useInput: IUserInput = (
       placeholder,
     },
     onClear,
+    value,
   };
 };
 

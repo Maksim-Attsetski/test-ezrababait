@@ -1,14 +1,21 @@
 import { useAuth, useDebounce, useInput, useUsers } from 'hooks';
-import React, { FC, FormEvent, memo, useEffect, useState } from 'react';
+import React, {
+  FC,
+  FormEvent,
+  memo,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { getApiError } from 'shared';
 import { Button, Input, Title } from 'UI';
 import { ICreateUser, ILoginInfo } from 'widgets/User';
 import s from './AuthForm.module.scss';
 
-const AuthForm: FC = (props) => {
+const AuthForm: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const { onLogin, onRegistration } = useAuth();
-  const { onGetUsers } = useUsers();
+  const { onGetUsers, usersIsLoading } = useUsers();
 
   const { value: tag, setValue: setTag } = useDebounce<string>(
     '',
@@ -17,22 +24,21 @@ const AuthForm: FC = (props) => {
   const email = useInput('', 'E-mail');
   const password = useInput('', 'Password');
   const confirmPassword = useInput('', 'Confirm password');
+
   const [errorText, setErrorText] = useState<string>('');
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      if (!isLogin && password.props.value !== confirmPassword.props.value) {
+      if (!isLogin && password.value !== confirmPassword.props.value) {
         throw new Error('Passwords is not equal!');
       }
 
-      const userForLogin: ILoginInfo = {
-        tag,
-        password: password.props.value,
-      };
-
+      const userForLogin: ILoginInfo = { tag, password: password.value };
       const userForSignup: ICreateUser = {
-        email: email.props.value,
+        email: email.value,
         name: tag,
         ...userForLogin,
       };
@@ -63,9 +69,50 @@ const AuthForm: FC = (props) => {
     setErrorText(users.length > 0 ? 'This tag is already exist' : '');
   }
 
+  const passwordProps = useMemo(
+    () => ({
+      type: 'password',
+      maxLength: 20,
+      minLength: 4,
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (!isLogin) {
+      onCheckIsTagExist();
+    }
+  }, [isLogin]);
+
   useEffect(() => {
     setErrorText('');
-  }, [password.props.value, confirmPassword.props.value]);
+  }, [password.value, confirmPassword.value, isLogin]);
+
+  useEffect(() => {
+    const isPassAndTagInValid = password.value.length === 0 || tag.length === 0;
+    const errorOrLoading = usersIsLoading || errorText.length > 0;
+
+    if (isLogin) {
+      setIsDisabled(isPassAndTagInValid || errorOrLoading);
+    } else {
+      const passwordsIsEqual = password.value !== confirmPassword.value;
+
+      setIsDisabled(
+        isPassAndTagInValid ||
+          email.value.length === 0 ||
+          passwordsIsEqual ||
+          errorOrLoading
+      );
+    }
+  }, [
+    errorText,
+    password.value,
+    confirmPassword.value,
+    tag,
+    email.value,
+    isLogin,
+    usersIsLoading,
+  ]);
 
   return (
     <div className={s.wrapper}>
@@ -78,10 +125,15 @@ const AuthForm: FC = (props) => {
             placeholder='Unique name'
           />
           {!isLogin && <Input type='email' {...email.props} />}
-          <Input type='password' {...password.props} />
-          {!isLogin && <Input type='password' {...confirmPassword.props} />}
+          <Input required {...passwordProps} {...password.props} />
+          {!isLogin && <Input {...passwordProps} {...confirmPassword.props} />}
           <div className={s.error}>{errorText}</div>
-          <Button text='Continue' type='submit' className={s.formBtn} />
+          <Button
+            disabled={isDisabled}
+            text='Continue'
+            type='submit'
+            className={s.formBtn}
+          />
         </form>
         <Title
           isSubTitle
