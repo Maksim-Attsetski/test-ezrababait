@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, FC, InputHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FC, InputHTMLAttributes, memo } from 'react';
 import s from './Input.module.scss';
 
 interface IProps
@@ -14,4 +14,4 @@ const Input: FC<IProps> = (props) => {
     </div>
   );
 };
-export default Input;
+export default memo(Input);

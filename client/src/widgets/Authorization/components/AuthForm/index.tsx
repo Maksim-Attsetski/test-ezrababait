@@ -1,7 +1,7 @@
 import { useAuth, useDebounce, useInput, useUsers } from 'hooks';
 import React, { FC, FormEvent, memo, useEffect, useState } from 'react';
 import { getApiError } from 'shared';
-import { Button, Input } from 'UI';
+import { Button, Input, Title } from 'UI';
 import { ICreateUser, ILoginInfo } from 'widgets/User';
 import s from './AuthForm.module.scss';
 
@@ -70,7 +70,7 @@ const AuthForm: FC = (props) => {
   return (
     <div className={s.wrapper}>
       <div className={'container ' + s.formContainer}>
-        <h3>Sign {isLogin ? 'in' : 'up'}</h3>
+        <Title text={`Sign ${isLogin ? 'in' : 'up'}`} />
         <form className={s.form} onSubmit={onFormSubmit}>
           <Input
             value={tag}
@@ -80,12 +80,14 @@ const AuthForm: FC = (props) => {
           {!isLogin && <Input type='email' {...email.props} />}
           <Input type='password' {...password.props} />
           {!isLogin && <Input type='password' {...confirmPassword.props} />}
-          <div>{errorText}</div>
-          <Button text='Continue' type='submit' />
+          <div className={s.error}>{errorText}</div>
+          <Button text='Continue' type='submit' className={s.formBtn} />
         </form>
-        <div onClick={() => setIsLogin((prev) => !prev)}>
-          {isLogin ? 'Already have an account' : 'Still no account'}?
-        </div>
+        <Title
+          isSubTitle
+          onClick={() => setIsLogin((prev) => !prev)}
+          text={isLogin ? 'Already have an account?' : 'Still no account?'}
+        />
       </div>
     </div>
   );
