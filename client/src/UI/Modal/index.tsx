@@ -4,6 +4,7 @@ import React, {
   ReactElement,
   ReactNode,
   SetStateAction,
+  useEffect,
 } from 'react';
 import s from './Modal.module.scss';
 
@@ -24,6 +25,10 @@ const Modal: FC<IProps> = ({
     setIsVisible(false);
     onClose();
   };
+
+  useEffect(() => {
+    document.body.classList[isVisible ? 'add' : 'remove']('lock');
+  }, [isVisible]);
 
   return (
     <div
