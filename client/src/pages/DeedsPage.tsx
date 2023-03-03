@@ -1,13 +1,12 @@
 import React, { FC, memo } from 'react';
-import s from './DeedsPage.module.scss';
 
-interface IProps {}
+import { CreateDeedForm, DeedList } from 'widgets/Deeds';
 
-const DeedsPage: FC<IProps> = () => {
-  const {} = {};
+const DeedsPage: FC = () => {
   return (
-    <div>
-      <div>deeds</div>
+    <div className='container'>
+      <CreateDeedForm />
+      <DeedList />
     </div>
   );
 };

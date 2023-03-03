@@ -23,8 +23,8 @@ const deedSlice = createSlice({
       state.deeds = state.deeds.map((deed) => 
         deed._id === action.payload._id ? { ...deed, ...action.payload } : deed)
     },
-    deleteDeedAC: (state: IState, action: PayloadAction<IDeed>) => {
-      state.deeds = state.deeds.filter((deed) => deed._id !== action.payload._id)
+    deleteDeedAC: (state: IState, action: PayloadAction<string>) => {
+      state.deeds = state.deeds.filter((deed) => deed._id !== action.payload)
     },
   }
 })
