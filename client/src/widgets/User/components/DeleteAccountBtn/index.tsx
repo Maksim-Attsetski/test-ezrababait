@@ -1,17 +1,19 @@
-import { useUsers } from 'hooks';
+import { useAuth, useUsers } from 'hooks';
 import React, { FC, memo, useState } from 'react';
 import { Button, Modal, Title } from 'UI';
 import s from './DeleteAccountBtn.module.scss';
 
 const DeleteAccountBtn: FC = () => {
   const { user, onDeleteUser } = useUsers();
+  const { onLogout } = useAuth();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const deleteUserHandle = async () => {
     if (!user?._id) return;
 
-    await onDeleteUser(user?._id);
+    const isSuccess = await onDeleteUser(user?._id);
+    isSuccess && (await onLogout());
   };
 
   return (

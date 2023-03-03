@@ -1,5 +1,6 @@
 import { useAuth, useDebounce, useInput, useUsers } from 'hooks';
 import React, {
+  ChangeEvent,
   FC,
   FormEvent,
   memo,
@@ -27,6 +28,7 @@ const AuthForm: FC = () => {
 
   const [errorText, setErrorText] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isTagValid, setIsTagValid] = useState<boolean>(true);
 
   const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -60,13 +62,19 @@ const AuthForm: FC = () => {
       element.onClear();
     }
     setTag('');
+    setIsTagValid(false);
   };
 
   async function onCheckIsTagExist() {
     if (isLogin) return;
 
     const users = await onGetUsers({ filter: 'tag==' + tag }, true);
-    setErrorText(!users || users.length > 0 ? 'This tag is already exist' : '');
+    const isExist = !users || users.length > 0;
+
+    setErrorText(isExist ? 'This tag is already exist' : '');
+    console.log(isExist);
+
+    setIsTagValid(!isExist);
   }
 
   const passwordProps = useMemo(
@@ -82,6 +90,7 @@ const AuthForm: FC = () => {
     if (!isLogin) {
       onCheckIsTagExist();
     }
+    setIsTagValid(isLogin);
   }, [isLogin]);
 
   useEffect(() => {
@@ -89,7 +98,7 @@ const AuthForm: FC = () => {
   }, [password.value, confirmPassword.value, isLogin]);
 
   useEffect(() => {
-    const isPassAndTagInValid = password.value.length === 0 || tag.length === 0;
+    const isPassAndTagInValid = password.value.length === 0 || !isTagValid;
     const errorOrLoading = usersIsLoading || errorText.length > 0;
 
     if (isLogin) {
@@ -108,22 +117,23 @@ const AuthForm: FC = () => {
     errorText,
     password.value,
     confirmPassword.value,
-    tag,
+    isTagValid,
     email.value,
     isLogin,
     usersIsLoading,
   ]);
+
+  const onTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTag(event.target.value);
+    setIsTagValid(false);
+  };
 
   return (
     <div className={s.wrapper}>
       <div className={'container ' + s.formContainer}>
         <Title text={`Sign ${isLogin ? 'in' : 'up'}`} />
         <form className={s.form} onSubmit={onFormSubmit}>
-          <Input
-            value={tag}
-            onChange={(e) => setTag(e.target.value)}
-            placeholder='Unique name'
-          />
+          <Input value={tag} onChange={onTagChange} placeholder='Unique name' />
           {!isLogin && <Input type='email' {...email.props} />}
           <Input required {...passwordProps} {...password.props} />
           {!isLogin && <Input {...passwordProps} {...confirmPassword.props} />}
