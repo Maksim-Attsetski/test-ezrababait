@@ -5,5 +5,6 @@ export enum routeNames {
     // auth
     Auth = '/auth',
     // public
-    Deeds = '/deeds'
+    Deeds = '/deeds',
+    Profile = '/profile',
 }

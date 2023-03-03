@@ -39,6 +39,7 @@ const Navigation: FC = () => {
         {isAuth ? (
           <Route path='/' element={<Layout />}>
             <Route element={<screens.Deeds />} path={routeNames.Deeds} />
+            <Route element={<screens.Profile />} path={routeNames.Profile} />
           </Route>
         ) : (
           <Route element={<screens.Auth />} path={routeNames.Auth} />

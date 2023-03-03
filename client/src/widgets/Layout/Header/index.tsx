@@ -20,6 +20,7 @@ const _Header: FC = () => {
     () => [
       { text: 'Home', link: routeNames.Home },
       { text: 'Deeds', link: routeNames.Deeds },
+      { text: 'Profile', link: routeNames.Profile },
     ],
     []
   );

@@ -6,3 +6,9 @@ export interface IQuery {
   filter?: string;
   search?: string;
 }
+
+export interface IListForChange {
+  field: string;
+  value: any;
+  add?: boolean;
+}

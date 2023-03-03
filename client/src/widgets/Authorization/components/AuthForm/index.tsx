@@ -66,7 +66,7 @@ const AuthForm: FC = () => {
     if (isLogin) return;
 
     const users = await onGetUsers({ filter: 'tag==' + tag }, true);
-    setErrorText(users.length > 0 ? 'This tag is already exist' : '');
+    setErrorText(!users || users.length > 0 ? 'This tag is already exist' : '');
   }
 
   const passwordProps = useMemo(

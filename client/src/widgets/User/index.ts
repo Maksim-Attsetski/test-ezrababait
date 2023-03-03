@@ -1,5 +1,16 @@
+import DeleteAccountBtn from './components/DeleteAccountBtn';
+import EditAccountBtn from './components/EditProfileBtn';
+import ProfileInfo from './components/ProfileInfo';
+
 import userService from './service';
 export * from './types';
 import userReducer, { actions } from './state';
 
-export { userService, userReducer, actions }
+export { 
+  ProfileInfo,
+  userService,
+  userReducer,
+  actions,
+  DeleteAccountBtn,
+  EditAccountBtn
+}

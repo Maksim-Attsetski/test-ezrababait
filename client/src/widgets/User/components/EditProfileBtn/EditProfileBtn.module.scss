@@ -1,0 +1,13 @@
+@import 'shared/all.scss';
+
+.form {
+  @include flexCol();
+
+  &Btn {
+    align-self: flex-end;
+  } 
+}
+
+.error {
+  color: $error;
+}
