@@ -1,34 +1,43 @@
-import React, { FC, memo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, memo, SetStateAction, useMemo, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAuth } from 'hooks';
 import { routeNames } from 'navigation/types';
+import { Button, IMenuLink, Sider } from 'UI';
 
 import s from './style.module.scss';
-import { Button } from 'UI';
 
-interface IProps {
-  setIsOpen: (val: boolean) => void;
-  isOpen: boolean;
-}
-
-const _Header: FC<IProps> = ({ setIsOpen, isOpen }) => {
+const _Header: FC = () => {
   const { isAuth, onLogout } = useAuth();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onBurgerClick = async () => {
     isAuth ? await onLogout() : navigate(routeNames.Auth);
   };
 
+  const menuLinks: IMenuLink[] = useMemo(
+    () => [
+      { text: 'Home', link: routeNames.Home },
+      { text: 'Deeds', link: routeNames.Deeds },
+    ],
+    []
+  );
+
   return (
     <div className={s.header}>
       <div className={'container ' + s.headerBody}>
-        <div className={s.sider}></div>
+        <Sider menu={menuLinks} isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className={s.buttonsContainer}>
+          {menuLinks.map(({ link, text }) => (
+            <NavLink className={s.navLink} key={link} to={link}>
+              {text}
+            </NavLink>
+          ))}
           <Button
             className={s.drawerButton}
-            onClick={() => setIsOpen(!isOpen)}
-            text={isOpen ? 'close' : 'open'}
+            onClick={() => setIsOpen((prev) => !prev)}
+            text='Menu'
           />
           <Button
             onClick={onBurgerClick}

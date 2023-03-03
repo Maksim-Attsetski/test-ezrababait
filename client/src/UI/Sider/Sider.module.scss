@@ -1,0 +1,65 @@
+@import 'shared/all.scss';
+
+@mixin fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.sider {
+  @include fixed();
+  width: 300px;
+  z-index: 100;
+  left: -200%;
+  transition: all linear 0.3s;
+
+  &.active {
+    left: 0;
+  }
+  
+  &Body {
+    background: white;
+    height: 100%;
+    padding: 2rem;
+    margin: 0 auto;
+  }
+
+  
+  .links {
+    @include flexCol();
+    .link {
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all linear 0.2s;
+      &:hover {
+        color: $main;
+        .line {
+          width: 100%;
+        }
+      }
+
+      .line {
+        width: 0%;
+        height: 1px;
+        background: $main;
+        transition: all linear 0.2s;
+      }
+    }
+  }
+}
+
+.shadow {
+  @include fixed();
+  right: 0;
+  z-index: 99;
+  background: #00000000;
+  pointer-events: none;
+  transition: all linear 0.25s;
+
+  &.active {
+    pointer-events: all;
+    background: #00000080;
+  }
+}

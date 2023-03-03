@@ -15,8 +15,28 @@
   }
 }
 
+.navLink {
+  margin: auto 0;
+  transition: all linear 0.15s;
+  font-size: 18px;
+  &:hover {
+    color: $main;
+  }
+
+  @include for-tablet {
+    display: none;
+  }
+}
+
 .buttonsContainer {
   display: flex;
   gap: 2rem;
   margin: auto 0;
+}
+
+.drawerButton {
+  display: none;
+  @include for-tablet {
+    display: block;
+  }
 }

@@ -7,8 +7,11 @@ import Line from './Line';
 import Input from './Input';
 import Title from './Title';
 import Modal from './Modal';
+import Sider, {IMenuLink} from './Sider';
 
+export type { IMenuLink }
 export { 
+  Sider,
   Button,
   Loader,
   EmptyBox, 
