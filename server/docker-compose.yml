@@ -1,0 +1,26 @@
+version: '3.0'
+
+services:
+  main: 
+    container_name: main
+    build:
+      context: .
+    env_file:
+      - .env.prod
+    ports:
+      - 8080:8080
+    command: yarn start
+    depends_on:
+      - mongo
+    restart: always
+  mongo:
+    image: mongo
+    container_name: mongo
+    env_file:
+      - .env.prod
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: Maks
+      MONGO_INITDB_ROOT_PASSWORD: MAks
+    ports:
+      - 5050:5050
+    restart: always

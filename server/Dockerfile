@@ -1,15 +1,16 @@
 FROM node
 
-WORKDIR /src/index
+WORKDIR /src
 
-COPY package.json /src/index/
+COPY package.json ./
+COPY yarn.lock ./
 
-RUN npm i
+RUN yarn
 
 COPY . .
 
 EXPOSE 5000
 
-CMD [ "yarn", "dev" ]
+CMD [ "yarn", "start" ]
 
 
