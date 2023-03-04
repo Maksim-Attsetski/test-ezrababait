@@ -1,5 +1,6 @@
 import { useInput, useUsers } from 'hooks';
 import React, { FC, FormEvent, memo, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button, Input, Modal, Title } from 'UI';
 import { IUser } from 'widgets/User';
 
@@ -7,6 +8,7 @@ import s from './EditProfileBtn.module.scss';
 
 const EditProfileBtn: FC = () => {
   const { user, onEditUser } = useUsers();
+  const { _id } = useParams();
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [errorText, setErrorText] = useState<string>('');
 
@@ -39,7 +41,7 @@ const EditProfileBtn: FC = () => {
     setErrorText('');
   }, [tag.value, name.value, email.value]);
 
-  return (
+  return _id ? null : (
     <div>
       <Modal isVisible={isVisible} setIsVisible={setIsVisible}>
         <form onSubmit={onFormSubmit} className={s.form}>

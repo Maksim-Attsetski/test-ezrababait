@@ -1,10 +1,12 @@
 import { useAuth, useUsers } from 'hooks';
 import React, { FC, memo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Button, Modal, Title } from 'UI';
 import s from './DeleteAccountBtn.module.scss';
 
 const DeleteAccountBtn: FC = () => {
   const { user, onDeleteUser } = useUsers();
+  const { _id } = useParams();
   const { onLogout } = useAuth();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -16,7 +18,7 @@ const DeleteAccountBtn: FC = () => {
     isSuccess && (await onLogout());
   };
 
-  return (
+  return _id ? null : (
     <div>
       <Modal isVisible={isOpen} setIsVisible={setIsOpen}>
         <Title

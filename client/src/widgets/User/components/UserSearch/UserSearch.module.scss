@@ -1,0 +1,56 @@
+@import 'shared/all.scss';
+
+.container {
+  position: relative;
+  .userList {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background: #fff;
+    margin: 0.5rem 0;
+    border-radius: 0.4rem;
+    .user {
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      transition: all linear 0.3s;
+      width: 100%;
+      position: relative;
+
+      &Tag {
+        font-size: 14px;
+        color: #00000097;
+      }
+
+      &Btn {
+        position: absolute;
+        top: 25%;
+        right: 5%;
+        transform: scale(0);
+      }
+      &:hover {
+        .userBtn {
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+}
+
+.inputContainer {
+  position: relative;
+
+  &Icon {
+    position: absolute;
+    top: 20%;
+    right: 5px;
+  }
+
+  .input {
+    width: 70px;
+    transition: all linear 0.25s;
+    &.active {
+      width: 200px;
+    }
+  }
+}

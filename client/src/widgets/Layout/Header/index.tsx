@@ -6,6 +6,7 @@ import { routeNames } from 'navigation/types';
 import { Button, IMenuLink, Sider } from 'UI';
 
 import s from './style.module.scss';
+import { UserSearch } from 'widgets/User';
 
 const _Header: FC = () => {
   const { isAuth, onLogout } = useAuth();
@@ -30,6 +31,7 @@ const _Header: FC = () => {
       <div className={'container ' + s.headerBody}>
         <Sider menu={menuLinks} isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className={s.buttonsContainer}>
+          <UserSearch />
           {menuLinks.map(({ link, text }) => (
             <NavLink className={s.navLink} key={link} to={link}>
               {text}

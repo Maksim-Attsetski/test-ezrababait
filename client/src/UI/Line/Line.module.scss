@@ -3,7 +3,10 @@
 .line {
   background: $dark;
   display: inline-block;
-  &.horizontal {}
+  &.horizontal {
+    width: 100%;
+    height: 1px;
+  }
   &.vertical {
     animation: disappear 0.7s linear 0s infinite;
     width: 1px;

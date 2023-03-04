@@ -40,6 +40,10 @@ const Navigation: FC = () => {
           <Route path='/' element={<Layout />}>
             <Route element={<screens.Deeds />} path={routeNames.Deeds} />
             <Route element={<screens.Profile />} path={routeNames.Profile} />
+            <Route
+              element={<screens.Profile />}
+              path={routeNames.Profile + '/:_id'}
+            />
           </Route>
         ) : (
           <Route element={<screens.Auth />} path={routeNames.Auth} />

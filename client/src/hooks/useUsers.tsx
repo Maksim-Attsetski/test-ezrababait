@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { getApiError, IListForChange } from 'shared';
+import { getApiError, IListForChange, IQuery } from 'shared';
 
 import { userService, IUser } from 'widgets/User';
 import { useTypedSelector } from './redux';
@@ -9,7 +9,7 @@ const useUsers = () => {
   const { action } = useActions();
   const { user: userState } = useTypedSelector((state) => state);
 
-  const onGetUsers = useCallback(async (query: any = {}, search?: boolean) => {
+  const onGetUsers = useCallback(async (query?: IQuery, search?: boolean) => {
     try {
       action.setUserLoading(true);
       const users = await userService.getUsers(query);
