@@ -1,0 +1,22 @@
+@import 'shared/all.scss';
+
+.filterList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.filter {
+  border: 1px solid $main;
+  background: $white;
+  padding: 0.5rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all linear 0.2s;
+  &.active {
+    border: 1px solid $white;
+    background: $main;    
+    color: $white;
+  }
+}

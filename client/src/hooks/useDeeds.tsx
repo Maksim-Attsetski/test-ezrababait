@@ -9,12 +9,19 @@ const useDeeds = () => {
   const { action } = useActions();
   const [deedLoading, setDeedLoading] = useState<boolean>(false);
 
-  const onGetAllDeeds = async (query?: IQuery) => {
+  const onGetAllDeeds = async (
+    query?: IQuery,
+    isBack?: boolean
+  ): Promise<IDeed[] | undefined> => {
     try {
       setDeedLoading(true);
 
       const deeds = await DeedService.getAll(query);
-      action.setDeedsAC(deeds);
+      if (isBack) {
+        return deeds;
+      } else {
+        action.setDeedsAC(deeds);
+      }
     } catch (error) {
       throw getApiError(error);
     } finally {

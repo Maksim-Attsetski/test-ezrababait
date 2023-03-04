@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useMemo, useState } from 'react';
 
 import { useDeeds, useUsers } from 'hooks';
 import { Button, Gap, List, Loader, Title } from 'UI';
@@ -8,6 +8,7 @@ import { assets } from 'assets';
 
 import s from './DeedList.module.scss';
 import EditDeedModal from '../EditDeedModal';
+import DeedsFilter from '../DeedsFilter';
 interface IProps {}
 
 const DeedList: FC<IProps> = () => {
@@ -15,6 +16,22 @@ const DeedList: FC<IProps> = () => {
     useDeeds();
   const { user } = useUsers();
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [deedFilter, setDeedFilter] = useState<'All' | 'My'>('All');
+
+  const filteredDeed = useMemo(() => {
+    switch (deedFilter) {
+      case 'All':
+        return deeds;
+      case 'My':
+        return deeds.filter((el) =>
+          typeof el.authorID === 'string'
+            ? el.authorID === user?._id
+            : el.authorID?._id === user?._id
+        );
+      default:
+        return deeds;
+    }
+  }, [deedFilter, deeds]);
 
   useEffect(() => {
     onGetAllDeeds({ dependencies: true });
@@ -22,13 +39,17 @@ const DeedList: FC<IProps> = () => {
 
   return (
     <div>
+      <Gap y={15} />
+      <DeedsFilter deedFilter={deedFilter} setDeedFilter={setDeedFilter} />
+      <Gap y={15} />
       <EditDeedModal isVisible={isEdit} setIsVisible={setIsEdit} />
       {deedLoading && <Loader />}
       <List
-        data={deeds}
+        data={filteredDeed}
         containerClassname={s.deedList}
+        itemClassname={s.deedContainer}
         renderItem={(deed: IDeed) => (
-          <div className={s.deedContainer}>
+          <>
             <div className={s.deed}>
               <div className={s.deedTime}>
                 {dateHelper.getTimeString(deed.createdAt)}
@@ -69,7 +90,7 @@ const DeedList: FC<IProps> = () => {
                 />
               </div>
             )}
-          </div>
+          </>
         )}
       />
     </div>
