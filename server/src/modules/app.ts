@@ -10,7 +10,13 @@ class App {
 
     app.use(cookieParser());
     app.setGlobalPrefix(Config.defaultUrl);
-    app.enableCors({ credentials: true, origin: ['http://localhost:3000'] });
+    app.enableCors({
+      credentials: true,
+      origin: [
+        'http://localhost:3000',
+        'https://ezrababait-frontend.onrender.com',
+      ],
+    });
 
     await app.listen(Config.PORT, () => {
       console.log(`Server starts on ${Config.PORT} port!`);

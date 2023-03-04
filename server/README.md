@@ -1,73 +1,48 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Ezrababait Test Backend application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This application is Node.js + Nestjs + MongoDB project.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Hierarchy
 
-## Description
+- `README.md` - project description
+- `.git` - git repository
+- `.gitignore` - list of files ignored by git
+- `.dockerignore` - list of files ignored by docker
+- `docker-compose.yml` - YML schema for setting up docker containers flow
+- `Makefile` - project control via wrapper of shell scripts
+- `.eslintrc.json` - ESLint configuration
+- `package.json` - the main project configuration with all dependencies, scripts and pathes
+- `yarn.lock` - automatically generated file by yarn package manager
+- `tsconfig.json` - file with typescrypt configuration
+- `src` - directory with all project files
+  - `src/api` - directory with all endproints (includes controllers, services, modules, models)
+  - `src/guards` - directory with middlewares (guardes in Nestjs)
+  - `src/modules` - directory with separated modules
+  - `src/utils` - directory with secondary functions
+  - `src/main.js` - the main start-server file
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### How do I get set up it locally in DEV mode?
 
-## Installation
+- Install the last versions of `node` and `yarn` to your OS
+- Go to `/server/src` folder via `cd ./server/src`
+- Create `.env` file. Fill fields `PORT`, `DB_URL`, `JWT_SECRET_ACCESS_KEY`, `JWT_SECRET_REFRESH_KEY`
+- Install all dependencies via `yarn`
+- Run the project via `yarn dev`
 
-```bash
-$ yarn install
-```
+---
+
+## In this project set up CI/CD flow
+
+### -MASTER- branch:
+
+##### After the code merges to the master it is automatically deployed.
 
 ## Running the app
 
 ```bash
 # development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
+$ `yarn dev`
 
 # production mode
-$ yarn run start:prod
+$ `yarn start`
 ```
-
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).

@@ -17,6 +17,7 @@ import { AuthGuard } from 'src/guards/authGuard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @UseGuards(AuthGuard)
   @Get()
   findAll(@Query() query: IQuery) {
     return this.usersService.findAll(query);
@@ -28,16 +29,19 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @UseGuards(AuthGuard)
   @Patch('list/:id')
   updateList(@Param('id') id: string, @Body() list: IListForChange[]) {
     return this.usersService.updateList(id, list);
   }
 
+  @UseGuards(AuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: GetUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @UseGuards(AuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);

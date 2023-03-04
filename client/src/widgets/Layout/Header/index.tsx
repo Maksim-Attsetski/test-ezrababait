@@ -31,7 +31,7 @@ const _Header: FC = () => {
       <div className={'container ' + s.headerBody}>
         <Sider menu={menuLinks} isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className={s.buttonsContainer}>
-          <UserSearch />
+          {isAuth && <UserSearch />}
           {menuLinks.map(({ link, text }) => (
             <NavLink className={s.navLink} key={link} to={link}>
               {text}
