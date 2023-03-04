@@ -1,5 +1,5 @@
 run:
-	docker run -d -p 5000:5000 --rm --name appdocker
+	docker run -d -p 8080:8080 --rm --name appdocker
 
 stop:
 	docker stop appdocker
