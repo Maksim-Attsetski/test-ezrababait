@@ -19,7 +19,7 @@ const _Layout: FC = () => {
           {isLoading && <Loader />}
         </main>
         <footer className={s.footer}>
-          <div>Сделано Отцецким Максимом</div>
+          <div>Maded by: Attsetski Maksim</div>
         </footer>
       </div>
     </div>

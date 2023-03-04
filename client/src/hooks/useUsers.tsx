@@ -26,6 +26,18 @@ const useUsers = () => {
     }
   }, []);
 
+  const onCheckUsers = useCallback(async (query?: IQuery) => {
+    try {
+      action.setUserLoading(true);
+      const isExist = await userService.getUsers(query);
+      return isExist;
+    } catch (error) {
+      console.log('API ERROR on check users', error);
+    } finally {
+      action.setUserLoading(false);
+    }
+  }, []);
+
   const onGetOneUser = async (_id: string) => {
     try {
       action.setUserLoading(true);
@@ -99,6 +111,7 @@ const useUsers = () => {
     onDeleteUser,
     onEditUser,
     onEditUserFields,
+    onCheckUsers,
   };
 };
 

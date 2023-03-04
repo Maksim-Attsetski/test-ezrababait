@@ -24,6 +24,16 @@ export class UsersService {
     return await FindUtils.getAllWithQuery(this.usersModel, query, GetUserDto);
   }
 
+  async checkIsExist(query: IQuery): Promise<boolean> {
+    const findedUsers: Users[] = await FindUtils.getAllWithQuery(
+      this.usersModel,
+      query,
+      GetUserDto,
+    );
+
+    return findedUsers.length > 0;
+  }
+
   async findOne(id: string): Promise<Users> {
     const user = await this.usersModel.findById(id);
 

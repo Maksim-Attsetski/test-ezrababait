@@ -16,7 +16,7 @@ import s from './AuthForm.module.scss';
 const AuthForm: FC = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const { onLogin, onRegistration } = useAuth();
-  const { onGetUsers, usersIsLoading } = useUsers();
+  const { onCheckUsers, usersIsLoading } = useUsers();
 
   const { value: tag, setValue: setTag } = useDebounce<string>(
     '',
@@ -68,12 +68,9 @@ const AuthForm: FC = () => {
   async function onCheckIsTagExist() {
     if (isLogin) return;
 
-    const users = await onGetUsers({ filter: 'tag==' + tag }, true);
-    const isExist = !users || users.length > 0;
+    const isExist = await onCheckUsers({ filter: 'tag==' + tag });
 
     setErrorText(isExist ? 'This tag is already exist' : '');
-    console.log(isExist);
-
     setIsTagValid(!isExist);
   }
 

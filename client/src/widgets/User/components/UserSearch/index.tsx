@@ -66,40 +66,42 @@ const UserSearch: FC = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.inputContainer}>
-        <Input
-          className={[s.input, isFocused ? s.active : ''].join(' ')}
-          onFocus={onInputFocus}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder='Find friens'
-        />
-        <assets.searchSvg
-          className={s.inputContainerIcon}
-          onClick={onInputFocus}
-        />
-      </div>
-      <div>
-        {isFocused && (
-          <List
-            containerClassname={s.userList}
-            itemClassname={s.user}
-            data={searchUsers}
-            renderItem={(user: IUser, inx: number) => (
-              <div>
-                <Button
-                  text='Open'
-                  className={s.userBtn}
-                  onClick={() => onOpenUser(user._id)}
-                />
-                <Title text={user.name} isSubTitle />
-                <Gap y={5} />
-                <div className={s.userTag}>{user.tag}</div>
-                {searchUsers.length - 1 !== inx && <Line />}
-              </div>
-            )}
+      <div className={s.container}>
+        <div className={s.inputContainer}>
+          <Input
+            className={[s.input, isFocused ? s.active : ''].join(' ')}
+            onFocus={onInputFocus}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            placeholder='Find friens'
           />
-        )}
+          <assets.searchSvg
+            className={s.inputContainerIcon}
+            onClick={onInputFocus}
+          />
+        </div>
+        <div>
+          {isFocused && (
+            <List
+              containerClassname={s.userList}
+              itemClassname={s.user}
+              data={searchUsers}
+              renderItem={(user: IUser, inx: number) => (
+                <div>
+                  <Button
+                    text='Open'
+                    className={s.userBtn}
+                    onClick={() => onOpenUser(user._id)}
+                  />
+                  <Title text={user.name} isSubTitle />
+                  <Gap y={5} />
+                  <div className={s.userTag}>{user.tag}</div>
+                  {searchUsers.length - 1 !== inx && <Line />}
+                </div>
+              )}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

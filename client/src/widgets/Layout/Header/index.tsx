@@ -18,12 +18,15 @@ const _Header: FC = () => {
   };
 
   const menuLinks: IMenuLink[] = useMemo(
-    () => [
-      { text: 'Home', link: routeNames.Home },
-      { text: 'Deeds', link: routeNames.Deeds },
-      { text: 'Profile', link: routeNames.Profile },
-    ],
-    []
+    () =>
+      isAuth
+        ? [
+            { text: 'Home', link: routeNames.Home },
+            { text: 'Deeds', link: routeNames.Deeds },
+            { text: 'Profile', link: routeNames.Profile },
+          ]
+        : [],
+    [isAuth]
   );
 
   return (
@@ -31,21 +34,31 @@ const _Header: FC = () => {
       <div className={'container ' + s.headerBody}>
         <Sider menu={menuLinks} isOpen={isOpen} setIsOpen={setIsOpen} />
         <div className={s.buttonsContainer}>
-          {isAuth && <UserSearch />}
-          {menuLinks.map(({ link, text }) => (
-            <NavLink className={s.navLink} key={link} to={link}>
-              {text}
-            </NavLink>
-          ))}
-          <Button
-            className={s.drawerButton}
-            onClick={() => setIsOpen((prev) => !prev)}
-            text='Menu'
-          />
-          <Button
-            onClick={onBurgerClick}
-            text={isAuth ? 'Logout' : 'Sign in'}
-          />
+          {isAuth && (
+            <div className={s.search}>
+              <UserSearch />
+            </div>
+          )}
+
+          <div className={s.flex}>
+            {isAuth &&
+              menuLinks.map(({ link, text }) => (
+                <NavLink className={s.navLink} key={link} to={link}>
+                  {text}
+                </NavLink>
+              ))}
+            {isAuth && (
+              <Button
+                className={s.drawerButton}
+                onClick={() => setIsOpen((prev) => !prev)}
+                text='Menu'
+              />
+            )}
+            <Button
+              onClick={onBurgerClick}
+              text={isAuth ? 'Logout' : 'Sign in'}
+            />
+          </div>
         </div>
       </div>
     </div>

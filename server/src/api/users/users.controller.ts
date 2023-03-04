@@ -23,6 +23,11 @@ export class UsersController {
     return this.usersService.findAll(query);
   }
 
+  @Get('exist')
+  checkIsExist(@Query() query: IQuery) {
+    return this.usersService.checkIsExist(query);
+  }
+
   @UseGuards(AuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {

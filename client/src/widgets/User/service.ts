@@ -5,10 +5,15 @@ import { IUser } from './types';
 class UserService {
   routes = {
     users: 'users/',
+    exist: 'users/exist',
     list: 'users/list/'
   }
   async getUsers(params: any): Promise<IUser[]> {
     const usersData = await $api.get(this.routes.users, { params });
+    return usersData.data;
+  }
+  async checkUsers(params: any): Promise<boolean> {
+    const usersData = await $api.get(this.routes.exist, { params });
     return usersData.data;
   }
   async getOneUser(_id: string): Promise<IUser> {

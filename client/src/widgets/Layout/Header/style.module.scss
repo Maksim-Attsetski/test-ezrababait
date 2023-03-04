@@ -30,10 +30,22 @@
 
 .buttonsContainer {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin: auto 0;
 }
+.flex {
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.search {
+  display: block;
+  @include for-tablet {
+    display: none;
+  }
+}
 .drawerButton {
   display: none;
   @include for-tablet {

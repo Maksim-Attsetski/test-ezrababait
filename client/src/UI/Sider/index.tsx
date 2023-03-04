@@ -2,6 +2,7 @@ import { assets } from 'assets';
 import { routeNames } from 'navigation/types';
 import React, { FC, memo, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserSearch } from 'widgets/User';
 
 import s from './Sider.module.scss';
 
@@ -49,6 +50,8 @@ const Sider: FC<IProps> = ({ menu, isOpen, setIsOpen }) => {
               </div>
             ))}
           </div>
+          <br />
+          <UserSearch />
         </div>
       </div>
     </div>
