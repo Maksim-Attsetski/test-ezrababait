@@ -1,5 +1,6 @@
 import DeleteAccountBtn from './components/DeleteAccountBtn';
 import EditAccountBtn from './components/EditProfileBtn';
+import FriendsBtn from './components/FriendsBtn';
 import ProfileInfo from './components/ProfileInfo';
 import UserSearch from './components/UserSearch';
 
@@ -15,4 +16,5 @@ export {
   DeleteAccountBtn,
   EditAccountBtn,
   UserSearch,
+  FriendsBtn,
 }

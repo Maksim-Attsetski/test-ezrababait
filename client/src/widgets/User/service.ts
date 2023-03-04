@@ -19,7 +19,7 @@ class UserService {
     const userData = await $api.patch(this.routes.users + _id, user);
     return userData.data;
   }
-  async editList(_id: string, data: IListForChange[]): Promise<IUser> {
+  async editList(_id: string, data: IListForChange<IUser>[]): Promise<IUser> {
     const userData = await $api.patch(this.routes.list + _id, data);
     return userData.data;
   }

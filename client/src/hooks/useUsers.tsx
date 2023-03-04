@@ -72,13 +72,17 @@ const useUsers = () => {
       action.setUserLoading(false);
     }
   };
-  const onEditUserFields = async (_id: string, data: IListForChange[]) => {
+  const onEditUserFields = async (
+    _id: string,
+    data: IListForChange<IUser>[],
+    isMe?: boolean
+  ) => {
     try {
       action.setUserLoading(true);
       if (!userState.user) return;
 
-      const updatedUser = await userService.editList(userState.user._id, data);
-      action.changeUserAC(updatedUser);
+      const updatedUser = await userService.editList(_id, data);
+      isMe && action.changeUserfieldsAC(data);
       return updatedUser;
     } catch (error) {
       console.log('API ERROR on edit account', error);

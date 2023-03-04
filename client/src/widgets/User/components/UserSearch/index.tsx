@@ -72,6 +72,7 @@ const UserSearch: FC = () => {
           onFocus={onInputFocus}
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          placeholder='Find friens'
         />
         <assets.searchSvg
           className={s.inputContainerIcon}

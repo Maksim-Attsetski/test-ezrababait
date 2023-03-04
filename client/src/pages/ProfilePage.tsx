@@ -1,6 +1,11 @@
 import React, { FC, memo } from 'react';
 import { Gap, Title } from 'UI';
-import { DeleteAccountBtn, EditAccountBtn, ProfileInfo } from 'widgets/User';
+import {
+  DeleteAccountBtn,
+  EditAccountBtn,
+  FriendsBtn,
+  ProfileInfo,
+} from 'widgets/User';
 
 const ProfilePage: FC = () => {
   return (
@@ -12,6 +17,7 @@ const ProfilePage: FC = () => {
       <div className='flex'>
         <DeleteAccountBtn />
         <EditAccountBtn />
+        <FriendsBtn />
       </div>
     </div>
   );

@@ -7,8 +7,8 @@ export interface IQuery {
   search?: string;
 }
 
-export interface IListForChange {
-  field: string;
+export interface IListForChange<T> {
+  field: keyof T;
   value: any;
   add?: boolean;
 }
