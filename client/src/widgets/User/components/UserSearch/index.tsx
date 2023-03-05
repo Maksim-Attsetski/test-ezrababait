@@ -9,7 +9,11 @@ import { routeNames } from 'navigation/types';
 
 import s from './UserSearch.module.scss';
 
-const UserSearch: FC = () => {
+interface IProps {
+  onOpen?: () => void;
+}
+
+const UserSearch: FC<IProps> = ({ onOpen = () => {} }) => {
   const { onGetUsers, user: authUser } = useUsers();
   const navigate = useNavigate();
   const { value, setValue } = useDebounce('', onCheckUsers);
@@ -31,6 +35,7 @@ const UserSearch: FC = () => {
   const onOpenUser = (_id: string) => {
     navigate(routeNames.Profile + '/' + _id);
     onInputBlur();
+    onOpen();
   };
 
   const onInputFocus = () => {

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { getApiError, IListForChange, IQuery } from 'shared';
+import { getApiError, IListForChange, IQuery, Logger } from 'shared';
 
 import { userService, IUser } from 'widgets/User';
 import { useTypedSelector } from './redux';
@@ -20,7 +20,8 @@ const useUsers = () => {
 
       action.setUsersAC(users);
     } catch (error) {
-      console.log('API ERROR on get users', error);
+      Logger.error('API ERROR on get users', error);
+      throw getApiError(error);
     } finally {
       action.setUserLoading(false);
     }
@@ -32,7 +33,8 @@ const useUsers = () => {
       const isExist = await userService.getUsers(query);
       return isExist;
     } catch (error) {
-      console.log('API ERROR on check users', error);
+      Logger.error('API ERROR on check users', error);
+      throw getApiError(error);
     } finally {
       action.setUserLoading(false);
     }
@@ -45,7 +47,8 @@ const useUsers = () => {
 
       return curUser;
     } catch (error) {
-      console.log('API ERROR on get one', error);
+      Logger.error('API ERROR on get one', error);
+      throw getApiError(error);
     } finally {
       action.setUserLoading(false);
     }
@@ -62,7 +65,7 @@ const useUsers = () => {
       );
       return isSuccess;
     } catch (error) {
-      console.log('API ERROR on delete account', error);
+      Logger.error('API ERROR on delete account', error);
       throw getApiError(error);
     } finally {
       action.setUserLoading(false);
@@ -78,7 +81,7 @@ const useUsers = () => {
       action.changeUserAC({ ...userState.user, ...user });
       return isSuccess;
     } catch (error) {
-      console.log('API ERROR on edit account', error);
+      Logger.error('API ERROR on edit account', error);
       throw getApiError(error);
     } finally {
       action.setUserLoading(false);
@@ -97,7 +100,7 @@ const useUsers = () => {
       isMe && action.changeUserfieldsAC(data);
       return updatedUser;
     } catch (error) {
-      console.log('API ERROR on edit account', error);
+      Logger.error('API ERROR on edit account', error);
       throw getApiError(error);
     } finally {
       action.setUserLoading(false);

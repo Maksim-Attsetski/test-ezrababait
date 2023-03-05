@@ -6,6 +6,7 @@ import { routeNames } from './types';
 import { Layout } from 'widgets/Layout';
 import { useAuth, useActions, useTypedSelector } from 'hooks';
 import { Loader } from 'UI';
+import { Logger } from 'shared';
 
 const Navigation: FC = () => {
   const { onCheckIsAuth, isAuth } = useAuth();
@@ -17,7 +18,7 @@ const Navigation: FC = () => {
       action.setIsAppLoadingAC(true);
       await Promise.all([onCheckIsAuth()]);
     } catch (error) {
-      console.log(error);
+      Logger.error('on get all', error);
     } finally {
       action.setIsAppLoadingAC(false);
     }

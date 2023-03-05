@@ -25,10 +25,6 @@ const FriendsBtn: FC = () => {
     [_id, allUsers, user]
   );
 
-  useEffect(() => {
-    console.log(curUser);
-  }, [curUser]);
-
   const isUserExist = useMemo(() => _id && !!curUser?.email, [curUser, _id]);
 
   const getList = (
@@ -71,7 +67,6 @@ const FriendsBtn: FC = () => {
     if (curUser && _id && user?._id) {
       const myList: IListForChange<IUser>[] = await getList(status, true);
       const otherList: IListForChange<IUser>[] = await getList(status);
-      console.log(myList, otherList, status);
 
       await onEditUserFields(user?._id, myList, true);
       await onEditUserFields(curUser?._id, otherList);
@@ -82,7 +77,6 @@ const FriendsBtn: FC = () => {
   const statuses: IStatus = useMemo(() => {
     if (curUser && user?._id) {
       const { followers, friendRequests, friends } = user;
-      // console.log('user, curUser', user, curUser);
 
       const inFriends =
         !!friends.length && friends?.some((el) => el === curUser._id); // в друзьях

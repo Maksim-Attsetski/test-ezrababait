@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useTypedSelector, useActions } from 'hooks';
 import { routeNames } from 'navigation/types';
-import { tokenName, getApiError } from 'shared';
+import { tokenName, Logger } from 'shared';
 import { authService, IAuthUserReponse } from 'widgets/Authorization';
 import { ICreateUser, ILoginInfo } from 'widgets/User';
 
@@ -22,7 +22,8 @@ const useAuth = () => {
       dispatchAuth(newUser);
       return !!newUser?.user?._id;
     } catch (error) {
-      throw getApiError(error);
+      Logger.error('error on authorization', error);
+      throw error;
     }
   };
 
@@ -33,7 +34,8 @@ const useAuth = () => {
 
       return !!newUser?.user?._id;
     } catch (error) {
-      throw getApiError(error);
+      Logger.error('error on authorization', error);
+      throw error;
     }
   };
 
@@ -46,15 +48,15 @@ const useAuth = () => {
   const onCheckIsAuth = async (): Promise<void> => {
     try {
       const tokenData = await authService.checkIsAuth();
-      console.log('tokenData.data', tokenData);
+      Logger.info('tokenData.data', tokenData);
 
       if (tokenData?.tokens) {
-        console.log('tokenData', tokenData);
+        Logger.info('tokenData', tokenData);
         localStorage.setItem(tokenName, tokenData?.tokens);
         action.setIsAuthAC(tokenData.user);
       }
     } catch (error: any) {
-      console.log(getApiError(error));
+      Logger.error('error on check is auth', error);
     }
   };
 

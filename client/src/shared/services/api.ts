@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import { Logger } from 'shared';
 import { baseURL } from '../config';
 
 export const tokenName = '@auth/access_token';
@@ -14,7 +15,7 @@ const $api = axios.create({
 
 $api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem(tokenName);
-  console.log('old token', token);
+  Logger.info('old token', token);
 
   config.headers.Authorization = `Bearer ${token}`;
   config.headers.Accept = '*/*'
@@ -32,12 +33,12 @@ $api.interceptors.response.use(
       originalReq._isRetry = true;
       try {
         const token = await axios.get(baseURL + 'refresh');
-        console.log('new token', token);
+        Logger.info('new token', token);
         localStorage.setItem(tokenName, token.data.accessToken);
 
         return $api.request(originalReq);
       } catch (err: any) {
-        console.log(err);
+        Logger.error('error on get new token', err);
         throw err;
       }
     }

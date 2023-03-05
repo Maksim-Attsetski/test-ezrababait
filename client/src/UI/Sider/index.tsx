@@ -51,7 +51,7 @@ const Sider: FC<IProps> = ({ menu, isOpen, setIsOpen }) => {
             ))}
           </div>
           <br />
-          <UserSearch />
+          <UserSearch onOpen={() => setIsOpen(false)} />
         </div>
       </div>
     </div>

@@ -12,7 +12,6 @@ export class AuthController {
     this.cookieOptions = {
       maxAge: 24 * 60 * 60 * 1000 * 30,
       httpOnly: true,
-      sameSite: 'Strict',
     };
   }
 

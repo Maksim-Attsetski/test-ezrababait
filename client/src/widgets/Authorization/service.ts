@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ICreateUser, ILoginInfo, IUser } from 'widgets/User';
-import { $api, tokenName, TResponse, baseURL } from 'shared';
+import { $api, tokenName, TResponse, baseURL, Logger } from 'shared';
 import { IAuthUserReponse } from './types';
 
 class AuthService {
@@ -18,7 +18,7 @@ class AuthService {
         password: userInfo.tag,
       });
 
-      console.log('login', data);
+      Logger.info('login', data);
       localStorage.setItem(tokenName, data?.data?.tokens);
 
       return data.data;
@@ -32,7 +32,7 @@ class AuthService {
     try {
       const data = await $api.post<IAuthUserReponse>(this.routes.registration, userInfo);
 
-      console.log('login', data);
+      Logger.info('login', data);
       localStorage.setItem(tokenName, data?.data?.tokens);
 
       return data.data;
@@ -48,9 +48,15 @@ class AuthService {
 
   checkIsAuth = async (): Promise<IAuthUserReponse> => {
     try {
+      const oldToken = localStorage.getItem(tokenName) || '';
+      console.log('cookie', document.cookie);
+      
       const tokenData = await axios.get(this.routes.refresh, {
         withCredentials: true,
         baseURL,
+        headers: {
+          Authorization: 'Bearer ' + oldToken
+        }
       });
 
       return tokenData.data;
