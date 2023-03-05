@@ -16,30 +16,32 @@ export class DeedService {
   }
 
   async create(createDeedDto: GetDeedDto) {
-    return await this.deedModel.create({
+    const newDeed = await this.deedModel.create({
       ...createDeedDto,
       createdAt: Date.now(),
     });
+
+    return await newDeed.populate('authorID');
   }
 
   async findOne(id: string) {
     const deed = await this.deedModel.findById(id);
 
     if (!deed) throw Errors.notFound('Deed');
-    return deed;
+    return await deed.populate('authorID');
   }
 
   async update(id: string, updateDeedDto: GetDeedDto) {
     const deed = await this.deedModel.findByIdAndUpdate(id, updateDeedDto);
 
     if (!deed) throw Errors.notFound('Deed');
-    return deed;
+    return await deed.populate('authorID');
   }
 
   async remove(id: string) {
     const deed = await this.deedModel.findByIdAndDelete(id);
 
     if (!deed) throw Errors.notFound('Deed');
-    return deed;
+    return id;
   }
 }

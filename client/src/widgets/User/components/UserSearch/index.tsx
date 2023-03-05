@@ -74,11 +74,11 @@ const UserSearch: FC<IProps> = ({ onOpen = () => {} }) => {
       <div className={s.container}>
         <div className={s.inputContainer}>
           <Input
-            className={[s.input, isFocused ? s.active : ''].join(' ')}
+            className={s.input}
             onFocus={onInputFocus}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder='Find friens'
+            placeholder='Find friens by tag'
           />
           <assets.searchSvg
             className={s.inputContainerIcon}

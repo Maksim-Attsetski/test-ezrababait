@@ -34,8 +34,13 @@ const DeedList: FC<IProps> = () => {
   }, [deedFilter, deeds]);
 
   useEffect(() => {
-    onGetAllDeeds({ dependencies: true });
-  }, []);
+    if (user) {
+      onGetAllDeeds({
+        dependencies: true,
+        filter: 'authorID_in_' + [...user?.friends, user?._id].join(',') + '',
+      });
+    }
+  }, [user?._id]);
 
   return (
     <div>

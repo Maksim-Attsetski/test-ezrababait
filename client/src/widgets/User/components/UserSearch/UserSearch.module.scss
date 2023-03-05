@@ -47,10 +47,6 @@
   }
 
   .input {
-    width: 110px;
-    transition: all linear 0.25s;
-    &.active {
-      width: 200px;
-    }
+    width: 200px;
   }
 }
