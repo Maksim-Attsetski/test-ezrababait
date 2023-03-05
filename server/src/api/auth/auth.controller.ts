@@ -12,8 +12,6 @@ export class AuthController {
     this.cookieOptions = {
       maxAge: 24 * 60 * 60 * 1000 * 30,
       httpOnly: true,
-      secure: true,
-      SameSite: 'None',
     };
   }
 
@@ -35,6 +33,7 @@ export class AuthController {
   @Get('refresh')
   async refresh(@Req() req, @Res({ passthrough: true }) res) {
     const { refreshToken } = req.cookies;
+    console.log(req.cookies);
 
     const data: IAuthResponse = await this.authService.refresh(refreshToken);
     return this.setCookies(data, res);

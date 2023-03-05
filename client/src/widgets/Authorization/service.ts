@@ -48,9 +48,7 @@ class AuthService {
 
   checkIsAuth = async (): Promise<IAuthUserReponse> => {
     try {
-      const oldToken = localStorage.getItem(tokenName) || '';
-      console.log('cookie', document.cookie);
-      
+      const oldToken = localStorage.getItem(tokenName) || '';      
       const tokenData = await axios.get(this.routes.refresh, {
         withCredentials: true,
         baseURL,
