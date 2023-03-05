@@ -30,7 +30,7 @@ const useUsers = () => {
   const onCheckUsers = useCallback(async (query?: IQuery) => {
     try {
       action.setUserLoading(true);
-      const isExist = await userService.getUsers(query);
+      const isExist = await userService.checkUsers(query);
       return isExist;
     } catch (error) {
       Logger.error('API ERROR on check users', error);
