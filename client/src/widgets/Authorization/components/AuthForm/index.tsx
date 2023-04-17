@@ -146,7 +146,7 @@ const AuthForm: FC = () => {
         <Title
           isSubTitle
           onClick={() => setIsLogin((prev) => !prev)}
-          text={isLogin ? 'Already have an account?' : 'Still no account?'}
+          text={isLogin ? 'Still no account?' : 'Already have an account?'}
         />
       </div>
     </div>
